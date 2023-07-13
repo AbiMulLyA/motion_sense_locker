@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SensorMonitoringRoute2.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SensorMonitoringPage2(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -40,6 +46,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [SensorMonitoringPage2]
+class SensorMonitoringRoute2 extends PageRouteInfo<void> {
+  const SensorMonitoringRoute2({List<PageRouteInfo>? children})
+      : super(
+          SensorMonitoringRoute2.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SensorMonitoringRoute2';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

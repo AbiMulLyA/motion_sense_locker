@@ -24,16 +24,14 @@ class TimerMonitoringPage extends StatefulWidget {
 class _TimerMonitoringPageState extends State<TimerMonitoringPage> {
   final _sharedPreferencesUtil = getIt<SharedPreferencesUtil>();
   Timer? timer;
-  Duration? showtime = Duration(minutes: 10);
+  Duration? showtime = Duration(minutes: 2);
   late int showtimeInSeconds = showtime!.inSeconds;
-  // StreamController<String> _streamController =
-  //     StreamController<String>.broadcast();
 
   Future<void> startTimer() async {
     if (!await requestPermissions()) {
       showAlertDialog(context);
     } else {
-      Timer.periodic(Duration(seconds: 1), (_) async {
+      timer = Timer.periodic(Duration(seconds: 1), (_) async {
         if (showtimeInSeconds > 0) {
           setState(() {
             showtimeInSeconds--;
@@ -43,10 +41,10 @@ class _TimerMonitoringPageState extends State<TimerMonitoringPage> {
         }
       });
 
-      await ForegroundUtil.startForegroundTask(
-        'timer',
-        showTimeInSecondsSelected: showtimeInSeconds,
-      );
+      // await ForegroundUtil.startForegroundTask(
+      //   'timer',
+      //   screenTimeInSecondsSelected: showtimeInSeconds,
+      // );
 
       await _sharedPreferencesUtil.setInt(
           'showTimeInSecondsSelected', showtimeInSeconds);
@@ -55,7 +53,8 @@ class _TimerMonitoringPageState extends State<TimerMonitoringPage> {
     }
   }
 
-  void stopTimer() {
+  void stopTimer() async {
+    await ForegroundUtil.stopForegroundTask();
     timer?.cancel();
     setState(() {
       showtimeInSeconds =
@@ -64,7 +63,6 @@ class _TimerMonitoringPageState extends State<TimerMonitoringPage> {
   }
 
   String getDuration(int totalSeconds) {
-    // Timer.periodic(Duration(seconds: 1), (_) async {});
     String seconds = (totalSeconds % 60).toInt().toString().padLeft(2, '0');
     String minutes =
         ((totalSeconds / 60) % 60).toInt().toString().padLeft(2, '0');
@@ -74,7 +72,6 @@ class _TimerMonitoringPageState extends State<TimerMonitoringPage> {
   }
 
   Future<bool> requestPermissions() async {
-    /// Return `true` if the given administrator component is currently active (enabled) in the system.
     bool permissionGranted = await DevicePolicyManager.isPermissionGranted();
     if (!permissionGranted) {
       permissionGranted = await DevicePolicyManager.requestPermession(

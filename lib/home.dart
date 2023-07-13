@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                       );
                       context.router.replace(SensorMonitoringRoute());
                     },
-                    child: Text('Sensor Monitoring'),
+                    child: Text('Automatic Monitoring'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                       );
                       context.router.replace(TimerMonitoringRoute());
                     },
-                    child: Text('Timer Monitoring'),
+                    child: Text('Manual Monitoring'),
                   ),
                 ],
               )

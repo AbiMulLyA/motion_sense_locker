@@ -72,11 +72,15 @@ class MainPage extends StatelessWidget {
       builder: (context, state) {
         debugPrint('Navigation State : $state');
         if (state == InitialSt()) {
-          context.router.replace(HomeRoute());
+          // context.router.replace(HomeRoute());
+          context.router.replace(SensorMonitoringRoute2());
+          // context.router.replace(TimerMonitoringRoute());
         }
 
         if (state == SensorSt()) {
-          context.router.replace(SensorMonitoringRoute());
+          context.router.replace(SensorMonitoringRoute2());
+
+          // context.router.replace(TimerMonitoringRoute());
         }
 
         if (state == TimerSt()) {

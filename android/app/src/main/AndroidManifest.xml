@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
    <application
-        android:label="motion_sense_locker"
+        android:label="Motion Sense Locker"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <receiver android:name="device.policy.manager.DeviceAdmin" android:permission="android.permission.BIND_DEVICE_ADMIN" android:exported="true">
             <meta-data android:name="android.app.device_admin" android:resource="@xml/policies" />
             <intent-filter>
